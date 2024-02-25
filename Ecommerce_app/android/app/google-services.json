@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "686677645855",
+    "project_id": "mobile-project-7ae4c",
+    "storage_bucket": "mobile-project-7ae4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:686677645855:android:20d8070244fc0d725a132a",
+        "android_client_info": {
+          "package_name": "com.example.seven_steps"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8Dp_wye87MTMbkP9s3XdbdZTQytPpkG4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
