@@ -1,6 +1,6 @@
 {
-    "name": "seven_steps",
-    "short_name": "seven_steps",
+    "name": "ecommerce_app",
+    "short_name": "ecommerce_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

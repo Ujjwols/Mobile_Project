@@ -2,7 +2,7 @@
     package="com.example.dummy">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="seven_steps"
+        android:label="ecommerce_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">

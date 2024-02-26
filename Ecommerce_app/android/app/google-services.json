@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "686677645855",
-    "project_id": "mobile-project-7ae4c",
-    "storage_bucket": "mobile-project-7ae4c.appspot.com"
+    "project_number": "668489064929",
+    "project_id": "zevils-5a935",
+    "storage_bucket": "zevils-5a935.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:686677645855:android:20d8070244fc0d725a132a",
+        "mobilesdk_app_id": "1:668489064929:android:63de98960cac124c8932a0",
         "android_client_info": {
-          "package_name": "com.example.seven_steps"
+          "package_name": "com.example.ecommerce_app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC8Dp_wye87MTMbkP9s3XdbdZTQytPpkG4"
+          "current_key": "AIzaSyBqlmDrqAgbjLlxJ57ZLnur1LcJDZMBuP4"
         }
       ],
       "services": {

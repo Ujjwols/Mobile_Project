@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -49,20 +43,39 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDPTgmgVm8j_rao8H91VH0CkabEg_q39YQ',
+    appId: '1:668489064929:web:fa7a0c000bdf3a0a8932a0',
+    messagingSenderId: '668489064929',
+    projectId: 'zevils-5a935',
+    authDomain: 'zevils-5a935.firebaseapp.com',
+    storageBucket: 'zevils-5a935.appspot.com',
+    measurementId: 'G-VRM7DVZ89M',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC8Dp_wye87MTMbkP9s3XdbdZTQytPpkG4',
-    appId: '1:686677645855:android:20d8070244fc0d725a132a',
-    messagingSenderId: '686677645855',
-    projectId: 'mobile-project-7ae4c',
-    storageBucket: 'mobile-project-7ae4c.appspot.com',
+    apiKey: 'AIzaSyBqlmDrqAgbjLlxJ57ZLnur1LcJDZMBuP4',
+    appId: '1:668489064929:android:63de98960cac124c8932a0',
+    messagingSenderId: '668489064929',
+    projectId: 'zevils-5a935',
+    storageBucket: 'zevils-5a935.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAZCSG3I0OCqVUnfGZjasWNoE9cVQHsqfE',
-    appId: '1:686677645855:ios:4bc02add676edb275a132a',
-    messagingSenderId: '686677645855',
-    projectId: 'mobile-project-7ae4c',
-    storageBucket: 'mobile-project-7ae4c.appspot.com',
-    iosBundleId: 'com.example.sevenSteps',
+    apiKey: 'AIzaSyBcgwQmShuG1026r2p_5iS11nsPfraghWM',
+    appId: '1:668489064929:ios:967a6b4ccef0943c8932a0',
+    messagingSenderId: '668489064929',
+    projectId: 'zevils-5a935',
+    storageBucket: 'zevils-5a935.appspot.com',
+    iosBundleId: 'com.example.ecommerce',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBcgwQmShuG1026r2p_5iS11nsPfraghWM',
+    appId: '1:668489064929:ios:48c475dc729b49448932a0',
+    messagingSenderId: '668489064929',
+    projectId: 'zevils-5a935',
+    storageBucket: 'zevils-5a935.appspot.com',
+    iosBundleId: 'com.example.ecommerce.RunnerTests',
   );
 }
