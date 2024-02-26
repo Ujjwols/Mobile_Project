@@ -127,8 +127,13 @@ class _CartScreenState extends State<CartScreen> {
                 height: 120, // Increased image height
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    e.product.imageUrl ?? '',
+                  child: e.product.imageUrl != null && e.product.imageUrl!.isNotEmpty
+                      ? Image.network(
+                    e.product.imageUrl!,
+                    fit: BoxFit.cover,
+                  )
+                      : Image.asset(
+                    'assets/images/logo.png', // Provide a default image path
                     fit: BoxFit.cover,
                   ),
                 ),
