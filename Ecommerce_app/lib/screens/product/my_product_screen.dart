@@ -75,7 +75,7 @@ class _MyProductScreenState extends State<MyProductScreen> {
           children: [
             // Background Image
             Image.asset(
-              'assets/images/whitbg.jpg', // Replace with your image path
+              'assets/images/favbg.jpg', // Replace with your image path
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,

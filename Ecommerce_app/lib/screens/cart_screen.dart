@@ -55,7 +55,7 @@ class _CartScreenState extends State<CartScreen> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
-                            "assets/images/whitbg.jpg",
+                            "assets/images/addtocart.jpg",
                           ),
                           fit: BoxFit.cover,
                         ),
