@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 40), // Increased gap from top
-                // _buildSearchBar(),
+                _buildSearchBar(),
                 SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -95,32 +95,37 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Widget _buildSearchBar() {
-  //   return Container(
-  //     padding: EdgeInsets.symmetric(horizontal: 20),
-  //     child: TextFormField(
-  //       onChanged: (value) {
-  //         // Filter products based on search query
-  //         List<ProductModel> filteredProducts = _productViewModel.products
-  //             .where((product) =>
-  //         product.productName?.toLowerCase().contains(value.toLowerCase()) ?? false)
-  //             .toList();
-  //
-  //         // Update UI with filtered products
-  //         setState(() {
-  //           _filteredProducts = filteredProducts;
-  //         });
-  //       },
-  //       decoration: InputDecoration(
-  //         hintText: 'Search...',
-  //         prefixIcon: Icon(Icons.search),
-  //         border: OutlineInputBorder(
-  //           borderRadius: BorderRadius.circular(25),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+  Widget _buildSearchBar() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: TextFormField(
+        onChanged: (value) {
+          // Filter products based on search query
+          List<ProductModel> filteredProducts = _productViewModel.products
+              .where((product) =>
+          product.productName?.toLowerCase().contains(value.toLowerCase()) ?? false)
+              .toList();
+
+          // Update UI with filtered products
+          setState(() {
+            _filteredProducts = filteredProducts;
+          });
+        },
+        decoration: InputDecoration(
+          hintText: 'Search...',
+          prefixIcon: Icon(Icons.search),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25),
+            borderSide: BorderSide(color: Colors.green), // Changed border color to green when focused
+          ),
+        ),
+      ),
+    );
+  }
+
 
   Widget _buildCategoryList(List<CategoryModel> categories) {
     // Remove duplicate categories based on their id
