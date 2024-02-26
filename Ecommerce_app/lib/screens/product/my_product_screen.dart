@@ -40,12 +40,32 @@ class _MyProductScreenState extends State<MyProductScreen> {
   Widget build(BuildContext context) {
     return Consumer<AuthViewModel>(builder: (context, authVM, child) {
       return Scaffold(
-        floatingActionButton: FloatingActionButton.extended(
-          label: Text("Add Product"),
-          icon: Icon(Icons.add),
-          onPressed: () {
-            Navigator.of(context).pushNamed("/add-product");
-          },
+        floatingActionButton: Positioned(
+          bottom: 100.0, // Adjusted to move it further upwards
+          right: 20.0,
+          child: FloatingActionButton.extended(
+            label: Row(
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Colors.white, // Changed color to white
+                  size: 32, // Increased size of '+' sign
+                ),
+                SizedBox(width: 10), // Added space between '+' sign and text
+                Text(
+                  "Add Product",
+                  style: TextStyle(
+                    color: Colors.white, // Changed text color to white
+                    fontSize: 20, // Increased text size
+                  ),
+                ),
+              ],
+            ),
+            onPressed: () {
+              Navigator.of(context).pushNamed("/add-product");
+            },
+            backgroundColor: Colors.green,
+          ),
         ),
         appBar: AppBar(
           backgroundColor: Colors.white12,
@@ -55,7 +75,7 @@ class _MyProductScreenState extends State<MyProductScreen> {
           children: [
             // Background Image
             Image.asset(
-              'assets/images/favbg.png', // Replace with your image path
+              'assets/images/favbg.jpg', // Replace with your image path
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
@@ -91,29 +111,36 @@ class _MyProductScreenState extends State<MyProductScreen> {
         Navigator.of(context).pushNamed("/single-product", arguments: e.id);
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+        margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20), // Increased margin
         child: Card(
           elevation: 5,
           child: ListTile(
+            contentPadding: EdgeInsets.all(20), // Increased content padding
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(5),
               child: Image.network(
                 e.imageUrl.toString(),
-                height: 300,
+                height: 200,
                 width: 100,
                 fit: BoxFit.cover,
                 errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                   return Image.asset(
-                    'assets/images/logo.png',
-                    height: 300,
+                    'assets/images/logo.jpg',
+                    height: 200,
                     width: 100,
                     fit: BoxFit.cover,
                   );
                 },
               ),
             ),
-            title: Text(e.productName.toString()),
-            subtitle: Text(e.productPrice.toString()),
+            title: Text(
+              e.productName.toString(),
+              style: TextStyle(fontSize: 24), // Increased font size
+            ),
+            subtitle: Text(
+              e.productPrice.toString(),
+              style: TextStyle(color: Colors.green, fontSize: 20), // Changed color to green and increased font size
+            ),
             trailing: Wrap(
               children: [
                 IconButton(
