@@ -78,12 +78,12 @@ class _AccountScreenState extends State<AccountScreen> {
               Navigator.of(context).pushNamed("/my-products");
             },
           ),
-          // makeSettings(
-          //   icon: Icon(Icons.person),
-          //   title: "Edit Profile",
-          //   subtitle: "Edit your profile information",
-          //   onTap: editProfile,
-          // ),
+          makeSettings(
+            icon: Icon(Icons.person),
+            title: "Edit Profile",
+            subtitle: "Edit your profile information",
+            onTap: editProfile,
+          ),
           makeSettings(
             icon: Icon(Icons.logout),
             title: "Logout",
