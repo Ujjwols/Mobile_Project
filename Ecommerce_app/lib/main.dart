@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       child: OverlayKit(
         child: Consumer<GlobalUIViewModel>(builder: (context, loader, child) {
           return MaterialApp(
-            title: 'Seven Steps',
+            title: 'ecommerce app',
             debugShowCheckedModeBanner: false,
             color: Colors.white,
             theme: ThemeData(

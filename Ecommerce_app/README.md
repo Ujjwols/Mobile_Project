@@ -1,4 +1,4 @@
-# seven_steps
+# Ecommerce_app
 
 A new Flutter project.
 
