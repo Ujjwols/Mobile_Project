@@ -1,8 +1,11 @@
+
+
+
+
 import 'package:flutter/material.dart';
 import 'package:Ecommerce_app/models/user_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
 import '../../services/file_upload.dart';
 import '../../viewmodels/auth_viewmodel.dart';
 import '../../viewmodels/global_ui_viewmodel.dart';
