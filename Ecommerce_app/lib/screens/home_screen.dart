@@ -185,8 +185,13 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: Image.network(
-                    products[index].imageUrl ?? '',
+                  child: products[index].imageUrl != null && products[index].imageUrl!.isNotEmpty
+                      ? Image.network(
+                    products[index].imageUrl!,
+                    fit: BoxFit.cover,
+                  )
+                      : Image.asset(
+                    'assets/images/logo.png',
                     fit: BoxFit.cover,
                   ),
                 ),
