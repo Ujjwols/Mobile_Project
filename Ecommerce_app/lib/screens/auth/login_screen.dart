@@ -89,6 +89,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: 'Email Address',
                       labelStyle: TextStyle(color: Colors.black),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -101,6 +105,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       labelText: 'Password',
                       labelStyle: TextStyle(color: Colors.black),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
                       suffixIcon: GestureDetector(
                         onTap: () {
                           setState(() {
@@ -120,11 +128,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                       padding: EdgeInsets.symmetric(vertical: 15),
-                      backgroundColor: Colors.green, // Changed button color to green
+                      backgroundColor: Colors.green,
                     ),
                     child: Text(
                       "Log In",
-                      style: TextStyle(fontSize: 20, color: Colors.white), // Changed text color to white
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),
                   SizedBox(height: 20),

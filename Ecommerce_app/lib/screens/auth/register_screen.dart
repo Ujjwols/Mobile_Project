@@ -74,14 +74,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               padding: EdgeInsets.all(20),
               child: Column(
                 children: [
-                  Text(
-                    "Join us",
-                    style: TextStyle(
-                      fontFamily: 'WorkSansSemiBold',
-                      fontSize: 24.0,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Image.asset(
+                    'assets/images/register.png', // Path to the image
+                    width: 150, // Adjust image width as needed
+                    height: 150, // Adjust image height as needed
                   ),
                   SizedBox(height: 20),
                   TextFormField(
@@ -101,6 +97,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Icons.person,
                         color: Colors.black,
                         size: 22.0,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.green), // Changed border color to green when focused
                       ),
                     ),
                   ),
@@ -123,6 +123,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         color: Colors.black,
                         size: 22.0,
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.green), // Changed border color to green when focused
+                      ),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -144,6 +148,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         color: Colors.black,
                         size: 22.0,
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.green), // Changed border color to green when focused
+                      ),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -164,6 +172,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Icons.lock,
                         size: 22.0,
                         color: Colors.black,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.green), // Changed border color to green when focused
                       ),
                       suffixIcon: GestureDetector(
                         onTap: () {
@@ -197,6 +209,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Icons.lock_clock,
                         size: 22.0,
                         color: Colors.black,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: Colors.green), // Changed border color to green when focused
                       ),
                       suffixIcon: GestureDetector(
                         onTap: () {

@@ -16,6 +16,9 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController _emailController = TextEditingController();
+  late GlobalUIViewModel _ui;
+  late AuthViewModel _auth;
+
   void resetPassword() async {
     _ui.loadState(true);
     try {
@@ -31,8 +34,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     _ui.loadState(false);
   }
 
-  late GlobalUIViewModel _ui;
-  late AuthViewModel _auth;
   @override
   void initState() {
     _ui = Provider.of<GlobalUIViewModel>(context, listen: false);
@@ -53,21 +54,19 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 children: [
                   const Text(
                     "Forgot The Password?",
-                    style:TextStyle(
+                    style: TextStyle(
                       fontSize: 25,
-                        fontFamily: 'WorkSansSemiBold',
-                      fontWeight: FontWeight.bold
-                    )
+                      fontFamily: 'WorkSansSemiBold',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(
                     height: 40,
                   ),
-
                   Image.asset(
                     "assets/images/forget.png",
                     height: 200,
                     width: 300,
-
                   ),
                   const SizedBox(
                     height: 40,
@@ -78,7 +77,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     style: const TextStyle(fontFamily: 'WorkSansSemiBold', fontSize: 16.0, color: Colors.black),
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                      focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide(color: Colors.green)), // Change border color to green when focused
                       border: InputBorder.none,
                       prefixIcon: const Icon(
                         Icons.email,
@@ -86,7 +85,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         size: 22.0,
                       ),
                       hintText: 'Email Address',
-                      hintStyle: const TextStyle(fontFamily: 'WorkSansSemiBold', fontSize: 17.0,color: Colors.green),
+                      hintStyle: const TextStyle(fontFamily: 'WorkSansSemiBold', fontSize: 17.0, color: Colors.black),
                     ),
                   ),
                   const SizedBox(
@@ -95,19 +94,19 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(color: Colors.brown)),),
-                          padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.symmetric(vertical: 10)),
-                        ),
-                        onPressed: () {
-                          resetPassword();
-                        },
-                        child: const Text(
-                          "Reset Password",
-                          style: TextStyle(color:Colors.green, fontSize: 20),
-                        )),
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide(color: Colors.brown))),
+                        padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.symmetric(vertical: 10)),
+                      ),
+                      onPressed: () {
+                        resetPassword();
+                      },
+                      child: const Text(
+                        "Reset Password",
+                        style: TextStyle(color: Colors.green, fontSize: 20),
+                      ),
+                    ),
                   ),
-
                   const SizedBox(
                     height: 20,
                   ),
@@ -119,13 +118,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         style: TextStyle(color: Colors.grey.shade800),
                       ),
                       InkWell(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text(
-                            "Sign In",
-                            style: TextStyle(color: Colors.green),
-                          ))
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          "Sign In",
+                          style: TextStyle(color: Colors.green),
+                        ),
+                      ),
                     ],
                   ),
                 ],
