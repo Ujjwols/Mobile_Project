@@ -122,7 +122,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                 Object exception,
                                 StackTrace? stackTrace) {
                               return Image.asset(
-                                'assets/images/logo.jpg',
+                                'assets/images/logo.png',
                                 width: 120,
                                 height: 120,
                                 fit: BoxFit.cover,

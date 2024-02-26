@@ -19,7 +19,9 @@ class _SingleProductScreenState extends State<SingleProductScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SingleProductViewModel>(
-        create: (_) => SingleProductViewModel(), child: SingleProductBody());
+      create: (_) => SingleProductViewModel(),
+      child: SingleProductBody(),
+    );
   }
 }
 
@@ -35,9 +37,10 @@ class _SingleProductBodyState extends State<SingleProductBody> {
   late GlobalUIViewModel _ui;
   late AuthViewModel _authViewModel;
   String? productId;
+
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       _singleProductViewModel = Provider.of<SingleProductViewModel>(context, listen: false);
       _authViewModel = Provider.of<AuthViewModel>(context, listen: false);
       _ui = Provider.of<GlobalUIViewModel>(context, listen: false);
@@ -74,188 +77,185 @@ class _SingleProductBodyState extends State<SingleProductBody> {
   }
 
   int quantity = 1;
+
   @override
   Widget build(BuildContext context) {
     return Consumer2<SingleProductViewModel, AuthViewModel>(
-        builder: (context, singleProductVM, authVm, child) {
-          return singleProductVM.product == null
-              ? Scaffold(
-            body: Container(
-              child: Text("Error"),
+      builder: (context, singleProductVM, authVm, child) {
+        return singleProductVM.product == null
+            ? Scaffold(
+          body: Container(
+            child: Text("Error"),
+          ),
+        )
+            : singleProductVM.product!.id == null
+            ? Scaffold(
+          body: Center(
+            child: Container(
+              child: Text("Please wait..."),
             ),
-          )
-              : singleProductVM.product!.id == null
-              ? Scaffold(
-            body: Center(
-              child: Container(
-                child: Text("Please wait..."),
+          ),
+        )
+            : Scaffold(
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: Container(
+            height: 70,
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            decoration: BoxDecoration(
+              color: Colors.green,
+              border: Border(
+                top: BorderSide(width: 1, color: Colors.black12),
               ),
             ),
-          )
-              : Scaffold(
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: Container(
-              height: 70,
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                  top: BorderSide(width: 1, color: Colors.black12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      if (quantity > 1) {
+                        quantity -= 1;
+                      }
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white, borderRadius: BorderRadius.circular(50)),
+                    padding: EdgeInsets.all(10),
+                    child: Icon(
+                      Icons.remove,
+                      size: 24,
+                      color: Colors.green,
+                    ),
+                  ),
                 ),
-              ),
-              child: Row(
-                children: [
-
-                  Expanded(
-                      child:
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                if (quantity > 1) {
-                                  quantity -= 1;
-                                }
-                              });
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFE6F0F5),
-                                  borderRadius: BorderRadius.circular(50)),
-                              padding: EdgeInsets.all(5),
-                              child: Icon(
-                                Icons.remove,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            child: Text(quantity.toString()),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                quantity += 1;
-                              });
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFE6F0F5),
-                                  borderRadius: BorderRadius.circular(50)),
-                              padding: EdgeInsets.all(5),
-                              child: Icon(
-                                Icons.add,
-                                size: 15,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
+                Text(
+                  quantity.toString(),
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      quantity += 1;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white, borderRadius: BorderRadius.circular(50)),
+                    padding: EdgeInsets.all(10),
+                    child: Icon(
+                      Icons.add,
+                      size: 24,
+                      color: Colors.green,
+                    ),
                   ),
-                  SizedBox(
-                    width: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    CartRepository()
+                        .addToCart(singleProductVM.product!, quantity)
+                        .then((value) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("Added to cart sucessfully")));
+                    });
+                  },
+                  child: Text(
+                    "Add to cart",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  Expanded(
-                      flex: 2,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          CartRepository().addToCart(singleProductVM.product!, quantity).then((value) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Added to cart sucessfully")));
-                          });
-                        },
-                        child: Text("Add to cart"),
-                      )),
-                ],
-              ),
-            ),
-            appBar: AppBar(
-              backgroundColor: Color(0xFFE6E6E6),
-              actions: [
-                Builder(builder: (context) {
-                  FavoriteModel? isFavorite;
-                  try {
-                    isFavorite = authVm.favorites.firstWhere(
-                            (element) => element.productId == singleProductVM.product!.id);
-                  } catch (e) {}
-
-                  return IconButton(
-                      onPressed: () {
-                        print(singleProductVM.product!.id!);
-                        favoritePressed(isFavorite, singleProductVM.product!.id!);
-                      },
-                      icon: Icon(
-                        Icons.favorite,
-                        color: isFavorite != null ? Colors.red : Colors.grey,
-                      ));
-                })
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                  ),
+                ),
               ],
             ),
-            backgroundColor: Colors.white,
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Image.network(
-                    singleProductVM.product!.imageUrl.toString(),
-                    height: 400,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    errorBuilder:
-                        (BuildContext context, Object exception, StackTrace? stackTrace) {
-                      return Image.asset(
-                        'assets/images/logo.png',
-                        height: 400,
-                        width: double.infinity,
-                        fit: BoxFit.fitWidth,
-                      );
-                    },
+          ),
+          appBar: AppBar(
+            backgroundColor: Color(0xFFE6E6E6),
+            actions: [
+              Builder(builder: (context) {
+                FavoriteModel? isFavorite;
+                try {
+                  isFavorite = authVm.favorites.firstWhere(
+                          (element) => element.productId == singleProductVM.product!.id);
+                } catch (e) {}
+
+                return IconButton(
+                  onPressed: () {
+                    print(singleProductVM.product!.id!);
+                    favoritePressed(isFavorite, singleProductVM.product!.id!);
+                  },
+                  icon: Icon(
+                    Icons.favorite,
+                    size: 30, // Increased icon size
+                    color: isFavorite != null ? Colors.red : Colors.grey,
                   ),
-                  SizedBox(
-                    height: 0.5,
+                );
+              })
+            ],
+          ),
+          backgroundColor: Colors.white,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Image.network(
+                  singleProductVM.product!.imageUrl.toString(),
+                  height: 400,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  errorBuilder:
+                      (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return Image.asset(
+                      'assets/images/logo.jpg',
+                      height: 400,
+                      width: double.infinity,
+                      fit: BoxFit.fitWidth,
+                    );
+                  },
+                ),
+                SizedBox(
+                  height: 0.5,
+                ),
+                Container(
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                  decoration: BoxDecoration(color: Colors.white24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Rs. " + singleProductVM.product!.productPrice.toString(),
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.green,
+                            fontWeight: FontWeight.w900),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        singleProductVM.product!.productName.toString(),
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        singleProductVM.product!.productDescription.toString(),
+                        style: TextStyle(
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                      width: double.infinity,alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                      decoration: BoxDecoration(color: Colors.white24),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Rs. " + singleProductVM.product!.productPrice.toString(),
-                            style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.brown,
-                                fontWeight: FontWeight.w900),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            singleProductVM.product!.productName.toString(),
-                            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            singleProductVM.product!.productDescription.toString(),
-                            style: TextStyle(
-                              fontSize: 22,
-                            ),
-                          ),
-                        ],
-                      )),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
